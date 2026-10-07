@@ -1,34 +1,37 @@
-# Decisões de projeto
+# Technical decisions
 
-## ADR 001 — começar com recomendação baseada em regras
+## ADR 001 — transparent rule-based baseline
 
-**Estado:** aceita  
-**Contexto:** o prazo de MVP é de duas semanas e o projeto está sendo construído como exercício de fundamentos. Não há ainda um conjunto de partidas rotulado e confiável para treinar um modelo.
+**Status:** accepted
 
-**Decisão:** a primeira versão usa regras explícitas e uma pontuação heurística para ordenar itens. Cada sugestão deve mostrar quais sinais e regras contribuíram para ela.
+**Context:** the initial version needs recommendations that can be inspected and evaluated without relying on a labeled match dataset.
 
-**Consequências positivas:**
-- O comportamento pode ser explicado durante uma entrevista.
-- Casos de teste podem ser criados sem depender de serviços externos.
-- É possível separar o que foi implementado do que seria uma evolução futura.
+**Decision:** use explicit matchup rules and a deterministic heuristic score to rank candidate items. Each recommendation should include the rule or item signal that contributed to it.
 
-**Limitações:**
-- As regras não aprendem automaticamente com partidas.
-- A cobertura inicial será pequena e refletirá as decisões manuais do projeto.
-- A pontuação não representa chance de vitória, taxa de sucesso ou qualidade estatística.
+**Benefits:**
+- The behavior is inspectable and reproducible.
+- Recommendations can be explained to users.
+- Scenarios can evaluate the expected behavior without external services.
 
-**Evolução:** comparar o baseline com um recomendador aprendido somente quando houver dados com licença e qualidade adequadas, além de uma avaliação offline definida.
+**Trade-offs:**
+- The rules do not learn from match outcomes.
+- Coverage is limited to the authored catalog and rules.
+- The score must not be interpreted as win probability or statistically measured item quality.
 
-## ADR 002 — usar dados estáticos versionados no MVP
+**Future consideration:** compare the baseline with a learned ranking approach only when suitable, permitted data and an evaluation method are available.
 
-**Estado:** aceita  
-**Decisão:** começar com arquivos JSON locais e registrar patch, data de obtenção e fonte. Isso mantém o app simples e reproduzível.
+## ADR 002 — versioned local catalog
 
-**Consequência:** os dados não se atualizam sozinhos; a manutenção por patch será uma tarefa explícita.
+**Status:** accepted
 
-## ADR 003 — não depender de scraping do OP.GG
+**Decision:** keep the initial champion and item catalog in local JSON files and record the patch and source.
 
-**Estado:** aceita  
-**Decisão:** o MVP não fará coleta automatizada do OP.GG. A fonte inicial para metadados estáticos será o Data Dragon da Riot; as regras didáticas terão sua própria documentação.
+**Trade-off:** data refresh is explicit; the catalog does not update itself.
 
-**Motivo:** reduzir dependências externas e evitar apresentar dados de terceiros como se fossem uma API pública oficial. Revisar políticas de uso antes de distribuir o produto.
+## ADR 003 — no automated OP.GG dependency
+
+**Status:** accepted
+
+**Decision:** do not make the initial application depend on OP.GG scraping. Use Riot's Data Dragon for static metadata and document the source of any additional data introduced later.
+
+**Reason:** keep the prototype reproducible and avoid presenting third-party statistics as an official public API.
