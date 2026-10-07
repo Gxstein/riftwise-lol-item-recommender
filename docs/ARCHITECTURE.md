@@ -55,10 +55,3 @@ Cada conjunto de dados deve indicar patch, data de obtenção e fonte. Não mist
 ## Avaliação
 
 A avaliação inicial usa cenários pequenos escritos para cobrir situações como muita ameaça mágica, muito dano físico ou cura alta. Uma métrica de cobertura pode verificar se as recomendações incluem os tipos de resposta esperados nesses cenários. Ela não mede se a build vence partidas nem substitui avaliação com dados reais.
-
-## Próximas evoluções possíveis
-
-- Coletar dados por uma fonte autorizada e documentada.
-- Comparar o baseline com uma abordagem de ranking aprendida, se houver dados rotulados suficientes.
-- Acrescentar métricas offline apropriadas e monitorar mudanças entre patches.
-- Separar serviço/API da interface caso o protótipo cresça.
